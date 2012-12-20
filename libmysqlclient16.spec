@@ -1,11 +1,11 @@
 Name: libmysqlclient16
-Version: 5.1.54
+Version: 5.1.65
 Release: 1%{?dist}
 Summary: The shared libraries required for MySQL clients
 Group: Applications/Databases
 URL: http://www.mysql.com
 # exceptions allow client libraries to be linked with most open source SW,
-# not only GPL code.
+# not only GPL code.  See README.mysql-license
 License: GPLv2 with exceptions
 
 # Upstream has a mirror redirector for downloads, so the URL is hard to
@@ -19,6 +19,7 @@ Source0: mysql-%{version}-nodocs.tar.gz
 Source1: generate-tarball.sh
 Source4: scriptstub.c
 Source5: my_config.h
+Source7: README.mysql-license
 # Working around perl dependency checking bug in rpm FTTB. Remove later.
 Source999: filter-requires-mysql.sh
 
@@ -31,7 +32,6 @@ Patch8: mysql-setschedparam.patch
 Patch9: mysql-no-docs.patch
 Patch12: mysql-cve-2008-7247.patch
 Patch13: mysql-expired-certs.patch
-Patch14: mysql-missing-string-code.patch
 Patch16: mysql-chain-certs.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -82,7 +82,6 @@ developing MySQL client applications.
 %patch9 -p1
 %patch12 -p1
 %patch13 -p1
-%patch14 -p1
 %patch16 -p1
 
 libtoolize --force
@@ -178,6 +177,9 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/aclocal/mysql.m4
 mkdir -p $RPM_BUILD_ROOT/etc/ld.so.conf.d
 echo "%{_origlibdir}/mysql" > $RPM_BUILD_ROOT/etc/ld.so.conf.d/%{name}-%{_arch}.conf
 
+# copy additional docs into build tree so %%doc will find them
+cp %{SOURCE7} README.mysql-license
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -191,7 +193,7 @@ fi
 
 %files
 %defattr(-,root,root)
-%doc COPYING
+%doc README COPYING README.mysql-license
 %{_origlibdir}/mysql/libmysqlclient*.so.*
 /etc/ld.so.conf.d/*
 
@@ -203,5 +205,8 @@ fi
 %{_libdir}/mysql/mysql_config
 
 %changelog
+* Thu Dec 20 2012 Andy Thompson <andy@webtatic.com> 5.1.65-1
+- Update to mysql-5.1.65
+
 * Tue Dec 21 2010 Andy Thompson <andy@webtatic.com> 5.1.54-1
 - Initial build
