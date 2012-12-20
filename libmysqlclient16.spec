@@ -1,5 +1,5 @@
 Name: libmysqlclient16
-Version: 5.1.65
+Version: 5.1.66
 Release: 1%{?dist}
 Summary: The shared libraries required for MySQL clients
 Group: Applications/Databases
@@ -19,6 +19,7 @@ Source0: mysql-%{version}-nodocs.tar.gz
 Source1: generate-tarball.sh
 Source4: scriptstub.c
 Source5: my_config.h
+Source6: README.mysql-docs
 Source7: README.mysql-license
 # Working around perl dependency checking bug in rpm FTTB. Remove later.
 Source999: filter-requires-mysql.sh
@@ -28,11 +29,14 @@ Patch2: mysql-errno.patch
 Patch4: mysql-testing.patch
 Patch5: mysql-install-test.patch
 Patch6: mysql-stack-guard.patch
+Patch7: mysql-disable-test.patch
 Patch8: mysql-setschedparam.patch
 Patch9: mysql-no-docs.patch
+Patch10: mysql-strmov.patch
 Patch12: mysql-cve-2008-7247.patch
 Patch13: mysql-expired-certs.patch
 Patch16: mysql-chain-certs.patch
+Patch17: mysql-cve-2012-5611.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Prereq: /sbin/ldconfig, /sbin/install-info, grep, fileutils
@@ -178,6 +182,7 @@ mkdir -p $RPM_BUILD_ROOT/etc/ld.so.conf.d
 echo "%{_origlibdir}/mysql" > $RPM_BUILD_ROOT/etc/ld.so.conf.d/%{name}-%{_arch}.conf
 
 # copy additional docs into build tree so %%doc will find them
+cp %{SOURCE6} README.mysql-docs
 cp %{SOURCE7} README.mysql-license
 
 %clean
@@ -205,8 +210,8 @@ fi
 %{_libdir}/mysql/mysql_config
 
 %changelog
-* Thu Dec 20 2012 Andy Thompson <andy@webtatic.com> 5.1.65-1
-- Update to mysql-5.1.65
+* Thu Dec 20 2012 Andy Thompson <andy@webtatic.com> 5.1.66-1
+- Update to mysql-5.1.66
 
 * Tue Dec 21 2010 Andy Thompson <andy@webtatic.com> 5.1.54-1
 - Initial build
