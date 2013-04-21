@@ -1,5 +1,5 @@
 Name: libmysqlclient16
-Version: 5.1.66
+Version: 5.1.67
 Release: 1%{?dist}
 Summary: The shared libraries required for MySQL clients
 Group: Applications/Databases
@@ -82,11 +82,14 @@ developing MySQL client applications.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
 %patch12 -p1
 %patch13 -p1
 %patch16 -p1
+%patch17 -p1
 
 libtoolize --force
 aclocal
@@ -210,6 +213,9 @@ fi
 %{_libdir}/mysql/mysql_config
 
 %changelog
+* Sun Apr 21 2013 Andy Thompson <andy@webtatic.com> 5.1.67-1
+- Update to mysql-5.1.67
+
 * Thu Dec 20 2012 Andy Thompson <andy@webtatic.com> 5.1.66-1
 - Update to mysql-5.1.66
 
