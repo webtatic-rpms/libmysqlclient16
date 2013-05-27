@@ -215,6 +215,10 @@ fi
 %{_libdir}/mysql/mysql_config
 
 %changelog
+* Mon May 27 2013 Andy Thompson <andy@webtatic.com> 5.1.69-1
+- Update to mysql-5.1.69
+- Add patch for bug #68999
+
 * Sun Apr 21 2013 Andy Thompson <andy@webtatic.com> 5.1.67-1
 - Update to mysql-5.1.67
 
