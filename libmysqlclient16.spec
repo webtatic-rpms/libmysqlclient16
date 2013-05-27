@@ -33,6 +33,7 @@ Patch7: mysql-disable-test.patch
 Patch8: mysql-setschedparam.patch
 Patch9: mysql-no-docs.patch
 Patch10: mysql-strmov.patch
+Patch11: mysql-openssl.patch
 Patch12: mysql-cve-2008-7247.patch
 Patch13: mysql-expired-certs.patch
 Patch16: mysql-chain-certs.patch
@@ -86,6 +87,7 @@ developing MySQL client applications.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 %patch12 -p1
 %patch13 -p1
 %patch16 -p1

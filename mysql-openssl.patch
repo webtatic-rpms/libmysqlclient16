@@ -1,0 +1,13 @@
+--- mysql-5.1.69/vio/viossl.c.openssl	2013-05-27 13:55:36.000000000 +0100
++++ mysql-5.1.69/vio/viossl.c	2013-05-27 13:56:12.000000000 +0100
+@@ -199,8 +199,10 @@
+   SSL_SESSION_set_timeout(SSL_get_session(ssl), timeout);
+   SSL_set_fd(ssl, vio->sd);
+ #ifndef HAVE_YASSL
++#ifdef SSL_OP_NO_COMPRESSION
+   SSL_set_options(ssl, SSL_OP_NO_COMPRESSION);
+ #endif
++#endif
+ 
+   if (connect_accept_func(ssl) < 1)
+   {
