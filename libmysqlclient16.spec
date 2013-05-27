@@ -1,5 +1,5 @@
 Name: libmysqlclient16
-Version: 5.1.67
+Version: 5.1.69
 Release: 1%{?dist}
 Summary: The shared libraries required for MySQL clients
 Group: Applications/Databases
